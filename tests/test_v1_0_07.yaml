@@ -1,0 +1,939 @@
+# Based on test spreadsheet L4-7_Triggers_v1.0.07.xlsx
+
+
+#+-------------------+
+#| User testbed info |
+#+-------------------+
+APIC: 172.25.246.26
+Username: admin
+Password: ins3965!
+
+Ixia: 172.25.246.104
+TxCard: 3
+TxPort: 1
+RxCard: 3
+RxPort: 2
+
+Tenant: checkpoint
+Common_tenant: common 
+
+#+--------------+
+#| Test Section |
+#+--------------+
+MIT: 
+- test_case:
+    id: 'tc1'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element: 
+      - 'fvTenant'
+
+- test_case:
+    id: 'tc2'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element: 
+      - 'fvTenant'
+
+- test_case:
+    id: 'tc3'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element: 
+      - 'fvAEPg[fvRsProv]'
+      #- 'l3extInstP[fvRsProv]'
+
+- test_case:
+    id: 'tc4'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAEPg[fvRsProv]'
+      #- 'l3extInstP[fvRsProv]'
+
+- test_case:
+    id: 'tc5'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAEPg[fvRsCons]'
+      #- 'l3extInstP[fvRsCons]'
+
+- test_case:
+    id: 'tc6'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAEPg[fvRsCons]'
+      #- 'l3extInstP[fvRsCons]'
+
+- test_case:
+    id: 'tc7'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAEPg[fvRsCons]'
+      - 'fvAEPg[fvRsProv]'
+      # - 'l3extInstP[fvRsProv]'
+      # - 'l3extInstP[fvRsCons]'
+
+- test_case:
+    id: 'tc8'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAEPg[fvRsCons]'
+      - 'fvAEPg[fvRsProv]'
+      # - 'l3extInstP[fvRsProv]'
+      # - 'l3extInstP[fvRsCons]'
+
+- test_case:
+    id: 'tc9'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvBD'
+
+- test_case:
+    id: 'tc10'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvBD'
+
+- test_case:
+    id: 'tc11'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvCtx'
+
+- test_case:
+    id: 'tc12'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvCtx'
+
+#tc13 - tc14 skipped - modify
+
+
+#+--------------+
+#| Test Section |
+#+--------------+
+LDevVip:
+- test_case:
+    id: 'tc15'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+     - 'vnsLDevVip'
+
+- test_case:
+    id: 'tc16'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+     - 'vnsLDevVip'
+
+- test_case:
+    id: 'tc17'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+     - 'vnsRsALDevToDomP'
+     - 'vnsRsALDevToPhysDomP'
+
+- test_case:
+    id: 'tc18'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+     - 'vnsRsALDevToDomP'
+     - 'vnsRsALDevToPhysDomP'
+
+# skip tc19 - tc22, due to credentials cannot be saved in xml
+
+- test_case:
+    id: 'tc23'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsLDevVip/vnsLIf'
+
+- test_case:
+    id: 'tc24'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsLDevVip/vnsLIf'
+
+- test_case:
+    id: 'tc25'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsLDevVip/vnsRsDevEPG'
+
+- test_case:
+    id: 'tc26'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsLDevVip/vnsRsDevEPG'
+
+- test_case:
+    id: 'tc27'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsLDevVip/vnsRsMDevAtt'
+
+- test_case:
+    id: 'tc28'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsLDevVip/vnsRsMDevAtt'
+
+- test_case:
+    id: 'tc29 and tc31'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsLDevVip/vnsDevFolder'
+
+- test_case:
+    id: 'tc30 and tc32'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsLDevVip/vnsDevFolder'
+
+#tc33 skipped - delete LDevVip and import saved config
+
+- test_case:
+    id: 'tc34'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsLDevVip/vnsCDev'
+
+- test_case:
+    id: 'tc35'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsLDevVip/vnsCDev'
+
+#tc36 and tc37 skipped:
+#	- package upgrade (add More DevFolders)
+#	- package upgrade (delete existing DevFolders)
+
+- test_case:
+    id: 'tc38'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsMetaIf'
+
+- test_case:
+    id: 'tc39'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsMetaIf'
+
+- test_case:
+    id: 'tc40'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsCIfAtt'
+
+- test_case:
+    id: 'tc41'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsCIfAtt'
+
+#tc42 - tc51 skipped - modify
+
+
+#+--------------+
+#| Test Section |
+#+--------------+
+CDev:
+- test_case:
+    id: 'tc52'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsLDevVip/vnsCDev'
+
+- test_case:
+    id: 'tc53'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsLDevVip/vnsCDev'
+
+#tc54 - tc55 skipped:
+# 	- Add another CDev to existing Clulster
+# 	- Delete second CDev from existing Cluster
+
+- test_case:
+    id: 'tc56'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsCIf'
+
+- test_case:
+    id: 'tc57'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsCIf'
+
+- test_case:
+    id: 'tc58'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsCIfPathAtt'
+
+- test_case:
+    id: 'tc59'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsCIfPathAtt'
+
+- test_case:
+    id: 'tc60'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsCDev/vnsCMgmt'
+
+- test_case:
+    id: 'tc61'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsCDev/vnsCMgmt'
+
+- test_case:
+    id: 'tc62'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsCDev/vnsCCred'
+      - 'vnsCDev/vnsCCredSecret'
+
+- test_case:
+    id: 'tc63'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsCDev/vnsCCred'
+      - 'vnsCDev/vnsCCredSecret'
+
+- test_case:
+    id: 'tc64'
+    operation: 'deleteAttribute'
+    attribute: 'devCtxLbl'
+    attrValue: ''
+    common_tenant: False
+    element:
+      - 'vnsLDevVip/vnsCDev'
+
+- test_case:
+    id: 'tc65'
+    operation: 'addAttribute'
+    attribute: 'devCtxLbl'
+    attrValue: ''
+    common_tenant: False
+    element:
+      - 'vnsLDevVip/vnsCDev'
+
+- test_case:
+    id: 'tc66'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsCDev/vnsDevFolder'
+
+- test_case:
+    id: 'tc67'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsCDev/vnsDevFolder'
+
+#tc68 - tc73 skipped - modify
+
+
+#+--------------+
+#| Test Section |
+#+--------------+
+Graph:
+- test_case:
+    id: 'tc74'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsTermNodeProv'
+
+- test_case:
+    id: 'tc75'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsTermNodeProv'
+
+- test_case:
+    id: 'tc76'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsTermNodeCon'
+
+- test_case:
+    id: 'tc77'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsTermNodeCon'
+
+- test_case:
+    id: 'tc78'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsNode'
+
+- test_case:
+    id: 'tc79'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsNode'
+
+#tc80 and tc81 skipped:
+#	- Add a second node to the Graph
+# 	- Delete the second node to the Graph
+
+- test_case:
+    id: 'tc82'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsDefaultScopeToTerm'
+
+- test_case:
+    id: 'tc83'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsDefaultScopeToTerm'
+
+- test_case:
+    id: 'tc84'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsNodeToMFunc'
+
+- test_case:
+    id: 'tc85'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsNodeToMFunc'
+
+- test_case:
+    id: 'tc86'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsConnToFlt'
+
+- test_case:
+    id: 'tc87'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsConnToFlt'
+
+- test_case:
+    id: 'tc88'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsConnection'
+
+- test_case:
+    id: 'tc89'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsConnection'
+
+#tc90 skipped - Change the connections in vnsAbsConnection
+
+- test_case:
+    id: 'tc91'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg'
+
+- test_case:
+    id: 'tc92'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg'
+
+- test_case:
+    id: 'tc93'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder'
+
+- test_case:
+    id: 'tc94'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder'
+
+- test_case:
+    id: 'tc95'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsParam'
+
+- test_case:
+    id: 'tc96'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsParam'
+
+- test_case:
+    id: 'tc97'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsCfgRel'
+
+- test_case:
+    id: 'tc98'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsCfgRel'
+
+#tc99 - tc104 do not exist in spreadsheet
+
+- test_case:
+    id: 'tc105'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsDevFolder/vnsAbsCfgRel'
+
+- test_case:
+    id: 'tc106'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsDevFolder/vnsAbsCfgRel'
+
+#tc107 - tc112 skipped - AbsGrpCfg
+
+- test_case:
+    id: 'tc113'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsDevCfg/vnsDevFolder/vnsAbsCfgRel'
+
+- test_case:
+    id: 'tc114'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsDevCfg/vnsDevFolder/vnsAbsCfgRel'
+
+#+--------------+
+#| Test Section |
+#+--------------+
+Contract:
+- test_case:
+    id: 'tc115'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj'
+
+- test_case:
+    id: 'tc116'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vzBrCP/vzSubj'
+
+- test_case:
+    id: 'tc117'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzRsSubjGraphAtt'
+
+- test_case:
+    id: 'tc118'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vzBrCP/vzSubj/vzRsSubjGraphAtt'
+
+- test_case:
+    id: 'tc119'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzRsSubjFiltAtt'
+
+- test_case:
+    id: 'tc120'
+    operation: 'add'
+    common_tenant: False
+    sleep: 300
+    element:
+      - 'vzBrCP/vzSubj/vzRsSubjFiltAtt'
+
+- test_case:
+    id: 'tc121'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzInTerm'
+
+- test_case:
+    id: 'tc122'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vzBrCP/vzSubj/vzInTerm'
+
+- test_case:
+    id: 'tc123'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzInTerm/vzRsInTermGraphAtt'
+
+- test_case:
+    id: 'tc124'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vzBrCP/vzSubj/vzInTerm/vzRsInTermGraphAtt'
+
+- test_case:
+    id: 'tc125'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzInTerm/vzRsFiltAtt'
+
+- test_case:
+    id: 'tc126'
+    operation: 'add'
+    common_tenant: False
+    sleep: 300
+    element:
+      - 'vzBrCP/vzSubj/vzInTerm/vzRsFiltAtt'
+
+- test_case:
+    id: 'tc127'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzOutTerm'
+
+- test_case:
+    id: 'tc128'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vzBrCP/vzSubj/vzOutTerm'
+
+- test_case:
+    id: 'tc129'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzOutTerm/vzRsOutTermGraphAtt'
+
+- test_case:
+    id: 'tc130'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vzBrCP/vzSubj/vzOutTerm/vzRsOutTermGraphAtt'
+
+- test_case:
+    id: 'tc131'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vzBrCP/vzSubj/vzOutTerm/vzRsFiltAtt'
+
+- test_case:
+    id: 'tc132'
+    operation: 'add'
+    common_tenant: False
+    sleep: 300
+    element:
+      - 'vzBrCP/vzSubj/vzOutTerm/vzRsFiltAtt'
+
+# tc133 - tc142 are modify tests
+
+#+--------------+
+#| Test Section |
+#+--------------+
+Application:
+- test_case:
+    id: 'tc143'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAEPg/vnsFolderInst'
+
+- test_case:
+    id: 'tc144'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAEPg/vnsFolderInst'
+
+- test_case:
+    id: 'tc145'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAEPg/vnsFolderInst/vnsParamInst'
+
+- test_case:
+    id: 'tc146'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAEPg/vnsFolderInst/vnsParamInst'
+
+- test_case:
+    id: 'tc147'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAEPg/vnsFolderInst/vnsCfgRelInst'
+
+- test_case:
+    id: 'tc148'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAEPg/vnsFolderInst/vnsCfgRelInst'
+
+- test_case:
+    id: 'tc152'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAp/vnsFolderInst'
+
+- test_case:
+    id: 'tc153'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAp/vnsFolderInst'
+
+- test_case:
+    id: 'tc154'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAp/vnsFolderInst/vnsParamInst'
+
+- test_case:
+    id: 'tc155'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAp/vnsFolderInst/vnsParamInst'
+
+- test_case:
+    id: 'tc156'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvAp/vnsFolderInst/vnsCfgRelInst'
+
+- test_case:
+    id: 'tc157'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvAp/vnsFolderInst/vnsCfgRelInst'
+
+- test_case:
+    id: 'tc161'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvTenant/vnsFolderInst'
+
+- test_case:
+    id: 'tc162'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvTenant/vnsFolderInst'
+
+- test_case:
+    id: 'tc163'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvTenant/vnsFolderInst/vnsParamInst'
+
+- test_case:
+    id: 'tc164'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvTenant/vnsFolderInst/vnsParamInst'
+
+- test_case:
+    id: 'tc165'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'fvTenant/vnsFolderInst/vnsCfgRelInst'
+
+- test_case:
+    id: 'tc166'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'fvTenant/vnsFolderInst/vnsCfgRelInst'

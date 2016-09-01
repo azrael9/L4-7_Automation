@@ -1,0 +1,237 @@
+#+-------------------+
+#| User testbed info |
+#+-------------------+
+APIC: 172.25.246.26
+Username: admin
+Password: ins3965!
+
+Ixia: 172.25.246.104
+TxCard: 3
+TxPort: 1
+RxCard: 3
+RxPort: 2
+
+Tenant: cp_test_delete
+Common_tenant: common 
+
+#+--------------+
+#| Test Section |
+#+--------------+
+Graph:
+- test_case:
+    id: 'tc74'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsTermNodeProv'
+
+- test_case:
+    id: 'tc75'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsTermNodeProv'
+
+- test_case:
+    id: 'tc76'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsTermNodeCon'
+
+- test_case:
+    id: 'tc77'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsTermNodeCon'
+
+- test_case:
+    id: 'tc78'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsNode'
+
+- test_case:
+    id: 'tc79'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsNode'
+
+#tc80 and tc81 skipped:
+#	- Add a second node to the Graph
+# 	- Delete the second node to the Graph
+
+- test_case:
+    id: 'tc82'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsDefaultScopeToTerm'
+
+- test_case:
+    id: 'tc83'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsDefaultScopeToTerm'
+
+- test_case:
+    id: 'tc84'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsNodeToMFunc'
+
+- test_case:
+    id: 'tc85'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsNodeToMFunc'
+
+- test_case:
+    id: 'tc86'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsRsConnToFlt'
+
+- test_case:
+    id: 'tc87'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsRsConnToFlt'
+
+- test_case:
+    id: 'tc88'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsConnection'
+
+- test_case:
+    id: 'tc89'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsConnection'
+
+#tc90 skipped - Change the connections in vnsAbsConnection
+
+- test_case:
+    id: 'tc91'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg'
+
+- test_case:
+    id: 'tc92'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg'
+
+- test_case:
+    id: 'tc93'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder'
+
+- test_case:
+    id: 'tc94'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder'
+
+- test_case:
+    id: 'tc95'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsParam'
+
+- test_case:
+    id: 'tc96'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsParam'
+
+- test_case:
+    id: 'tc97'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsCfgRel'
+
+- test_case:
+    id: 'tc98'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsCfgRel'
+
+#tc99 - tc104 do not exist in spreadsheet
+
+- test_case:
+    id: 'tc105'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsFuncCfg/vnsDevFolder/vnsAbsCfgRel'
+
+- test_case:
+    id: 'tc106'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsFuncCfg/vnsDevFolder/vnsAbsCfgRel'
+
+#tc107 - tc112 skipped - AbsGrpCfg
+
+- test_case:
+    id: 'tc113'
+    operation: 'delete'
+    common_tenant: False
+    sleep: 60
+    element:
+      - 'vnsAbsDevCfg/vnsDevFolder/vnsAbsCfgRel'
+
+- test_case:
+    id: 'tc114'
+    operation: 'add'
+    common_tenant: False
+    sleep: 600
+    element:
+      - 'vnsAbsDevCfg/vnsDevFolder/vnsAbsCfgRel'
