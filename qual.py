@@ -3,7 +3,7 @@
 # Time: Feb 16, 2016
 
 import os, time, itertools
-import pytest, yaml, argparse
+import pytest, yaml, argparse, json
 from lxml import etree
 
 # autoQual library
@@ -15,7 +15,9 @@ from lib.ixiaStats import ixiaStats
 # parse arguments for test definition and configs
 parser = argparse.ArgumentParser(description = '''Automation test harness''')
 parser.add_argument('-t', '--test', required = True, help = 'Mandatory arg - test definition file. Format = "test_xyz.yaml"', nargs = 1, type = str)
-parser.add_argument('-i', '--ixia', required = False, help = 'Optional arg - validate ixia traffic', nargs = 1, type = bool)
+parser.add_argument('--ixia', dest = 'ixia_feature', required = False, help = 'Optional arg - validate ixia traffic.', action = 'store_true')
+parser.add_argument('--no-ixia', dest = 'ixia_feature', required = False, help = 'Optional arg - do NOT validate ixia traffic.', action = 'store_false')
+parser.set_defaults(ixia_feature = False)
 
 args = parser.parse_args()
 testTemplate = args.test[0]
@@ -26,8 +28,12 @@ if not os.path.isfile(testTemplate):
 # load yaml config
 with open(testTemplate,'rbU') as f:
     testdef = yaml.safe_load(f.read())
+
+# global parameters
 MIT, LDevVip, CDev, Graph, Contract, Application, MDevMgr, Custom = generate_testdata(testdef=testdef)
 apicInfo = dict(APIC = testdef['APIC'], Username = testdef['Username'], Password = testdef['Password'])
+tenant = testdef['Tenant']
+graphs = -1
 
 # # customize test id
 def idfn(val):
@@ -44,6 +50,7 @@ def run(trigger):
     '''
     # Begin "POST" trigger
     tenant, config, operation, sleeptime = tuple(itertools.chain(*trigger.values()))
+    global graphs
     # xTrim returns None if target element not found
     if config == None or len(config) == 0:
         pytest.skip("Test object(element) not found in user configs")
@@ -58,8 +65,13 @@ def run(trigger):
     
     time.sleep(sleeptime)
     
+    # graph validation
+    test_graphs = findAppliedGraphs()
+    if not test_graphs == graphs and operation == 'add':
+        pytest.fail('Configs have not converged. Service graphs before test: {0}   Service graphs after test: {1}'.format(graphs, test_graphs))
+
     # Traffic validation
-    if args.ixia[0] == True and operation == 'add':
+    if args.ixia_feature == True and operation == 'add':
         ixia = ixiaStats(testdef['Ixia'])
         with ixia.connect():
             framesTxRate = ixia.framesSentRate(testdef['TxCard'], testdef['TxPort'])
@@ -67,6 +79,29 @@ def run(trigger):
         if not ixia.isclose(framesTxRate, framesRxRate) or ixia.isclose(framesTxRate, 0):
             pytest.fail('Ixia traffic validation failed! Tx rate: {0}  Rx rate: {1}'.format(framesTxRate, framesRxRate))
 
+def findAppliedGraphs():
+    ''' Return number of graphs in applied state 
+        rType: int
+    '''
+    apic = get_APIC(apicInfo)
+    get = {
+    'path' : 'api/node/mo/uni/tn-{0}.json'.format(tenant),
+    'query' : 'query-target=children&target-subtree-class=vnsGraphInst&query-target-filter=eq(vnsGraphInst.configSt,"applied"'
+    }
+    success, status, payload = apic.get(**get)
+    if not success:
+        return -1
+    return json.loads(payload)['totalCount']
+
+#######################
+# Main test functions #
+#######################
+def test_setup():
+    ''' Test APIC connectivity and establish baseline '''
+    global graphs
+    graphs = findAppliedGraphs()
+    if graphs == -1:
+        pytest.fail('Query to APIC has failed. Please check.')
 
 @pytest.mark.skipif(not MIT, reason='MIT test section not specified')
 @pytest.mark.parametrize("trigger", MIT, ids=idfn)
