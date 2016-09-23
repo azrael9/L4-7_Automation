@@ -10,4 +10,4 @@ prerequisite:
 - pip install -U pytest
 
 To start:
-- python qual.py -t [test_definitions.yaml] -i [True/False to enable Ixia traffic validation]
+- python qual.py -t [test_definitions.yaml] --ixia/--no-ixia
