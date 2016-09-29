@@ -153,7 +153,7 @@ def test_Custom(trigger):
 
 
 def main():
-    pytest.main('-rxs')
+    pytest.main('-sv -rfse')
 
 if __name__ == '__main__':
     main()

@@ -4,17 +4,17 @@
 #+-------------------+
 #| User testbed info |
 #+-------------------+
-APIC: 172.25.246.26
+APIC: 192.168.1.1
 Username: admin
-Password: ins3965!
+Password: secretpassword
 
-Ixia: 172.25.246.104
-TxCard: 3
+Ixia: 192.168.1.2
+TxCard: 1
 TxPort: 1
-RxCard: 3
+RxCard: 1
 RxPort: 2
 
-Tenant: checkpoint
+Tenant: test_tenant
 Common_tenant: common 
 
 #+--------------+
@@ -22,7 +22,7 @@ Common_tenant: common
 #+--------------+
 MIT: 
 - test_case:
-    id: 'tc1'
+    id: 'tc1 - delete tenant'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -30,7 +30,7 @@ MIT:
       - 'fvTenant'
 
 - test_case:
-    id: 'tc2'
+    id: 'tc2 - add tenant'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -38,7 +38,7 @@ MIT:
       - 'fvTenant'
 
 - test_case:
-    id: 'tc3'
+    id: 'tc3 - delete contract provider'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -47,7 +47,7 @@ MIT:
       #- 'l3extInstP[fvRsProv]'
 
 - test_case:
-    id: 'tc4'
+    id: 'tc4 - add contract provider'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -56,7 +56,7 @@ MIT:
       #- 'l3extInstP[fvRsProv]'
 
 - test_case:
-    id: 'tc5'
+    id: 'tc5 - delete contract consumer'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -65,7 +65,7 @@ MIT:
       #- 'l3extInstP[fvRsCons]'
 
 - test_case:
-    id: 'tc6'
+    id: 'tc6 - add contract consumer'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -74,7 +74,7 @@ MIT:
       #- 'l3extInstP[fvRsCons]'
 
 - test_case:
-    id: 'tc7'
+    id: 'tc7 - delete both provider and consumer'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -85,7 +85,7 @@ MIT:
       # - 'l3extInstP[fvRsCons]'
 
 - test_case:
-    id: 'tc8'
+    id: 'tc8 - add both provider and consumer'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -96,7 +96,7 @@ MIT:
       # - 'l3extInstP[fvRsCons]'
 
 - test_case:
-    id: 'tc9'
+    id: 'tc9 - delete BDs'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -104,7 +104,7 @@ MIT:
       - 'fvBD'
 
 - test_case:
-    id: 'tc10'
+    id: 'tc10 - add BDs'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -112,7 +112,7 @@ MIT:
       - 'fvBD'
 
 - test_case:
-    id: 'tc11'
+    id: 'tc11 - delete context'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -120,14 +120,12 @@ MIT:
       - 'fvCtx'
 
 - test_case:
-    id: 'tc12'
+    id: 'tc12 - add context'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'fvCtx'
-
-#tc13 - tc14 skipped - modify
 
 
 #+--------------+
@@ -135,7 +133,7 @@ MIT:
 #+--------------+
 LDevVip:
 - test_case:
-    id: 'tc15'
+    id: 'tc13 - delete L4-7 device'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -143,7 +141,7 @@ LDevVip:
      - 'vnsLDevVip'
 
 - test_case:
-    id: 'tc16'
+    id: 'tc14 - add L4-7 device'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -151,7 +149,7 @@ LDevVip:
      - 'vnsLDevVip'
 
 - test_case:
-    id: 'tc17'
+    id: 'tc15 - delete domain mapped to L4-7 device'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -160,7 +158,7 @@ LDevVip:
      - 'vnsRsALDevToPhysDomP'
 
 - test_case:
-    id: 'tc18'
+    id: 'tc16 - add domain mapped to L4-7 device'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -168,10 +166,8 @@ LDevVip:
      - 'vnsRsALDevToDomP'
      - 'vnsRsALDevToPhysDomP'
 
-# skip tc19 - tc22, due to credentials cannot be saved in xml
-
 - test_case:
-    id: 'tc23'
+    id: 'tc17 - delete logical interface'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -179,7 +175,7 @@ LDevVip:
       - 'vnsLDevVip/vnsLIf'
 
 - test_case:
-    id: 'tc24'
+    id: 'tc18 - add logical interface'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -187,7 +183,7 @@ LDevVip:
       - 'vnsLDevVip/vnsLIf'
 
 - test_case:
-    id: 'tc25'
+    id: 'tc19 - delete inband mgmt EPG'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -195,7 +191,7 @@ LDevVip:
       - 'vnsLDevVip/vnsRsDevEPG'
 
 - test_case:
-    id: 'tc26'
+    id: 'tc20 - add inband mgmt EPG'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -203,7 +199,7 @@ LDevVip:
       - 'vnsLDevVip/vnsRsDevEPG'
 
 - test_case:
-    id: 'tc27'
+    id: 'tc21 - delete meta device attachment'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -211,7 +207,7 @@ LDevVip:
       - 'vnsLDevVip/vnsRsMDevAtt'
 
 - test_case:
-    id: 'tc28'
+    id: 'tc22 - add meta device attachment'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -219,7 +215,7 @@ LDevVip:
       - 'vnsLDevVip/vnsRsMDevAtt'
 
 - test_case:
-    id: 'tc29 and tc31'
+    id: 'tc23 - delete L4-7 device parameter vnsDevFolder'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -227,17 +223,15 @@ LDevVip:
       - 'vnsLDevVip/vnsDevFolder'
 
 - test_case:
-    id: 'tc30 and tc32'
+    id: 'tc24 - add L4-7 device parameter vnsDevFolder'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsLDevVip/vnsDevFolder'
 
-#tc33 skipped - delete LDevVip and import saved config
-
 - test_case:
-    id: 'tc34'
+    id: 'tc25 - delete concrete device (cluster)'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -245,19 +239,15 @@ LDevVip:
       - 'vnsLDevVip/vnsCDev'
 
 - test_case:
-    id: 'tc35'
+    id: 'tc26 - add concrete device (cluster)'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsLDevVip/vnsCDev'
 
-#tc36 and tc37 skipped:
-#	- package upgrade (add More DevFolders)
-#	- package upgrade (delete existing DevFolders)
-
 - test_case:
-    id: 'tc38'
+    id: 'tc27 - delete meta interface relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -265,7 +255,7 @@ LDevVip:
       - 'vnsRsMetaIf'
 
 - test_case:
-    id: 'tc39'
+    id: 'tc28 - add meta interface relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -273,7 +263,7 @@ LDevVip:
       - 'vnsRsMetaIf'
 
 - test_case:
-    id: 'tc40'
+    id: 'tc29 - delete concrete interface relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -281,14 +271,12 @@ LDevVip:
       - 'vnsRsCIfAtt'
 
 - test_case:
-    id: 'tc41'
+    id: 'tc30 - add concrete interface relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsRsCIfAtt'
-
-#tc42 - tc51 skipped - modify
 
 
 #+--------------+
@@ -296,7 +284,7 @@ LDevVip:
 #+--------------+
 CDev:
 - test_case:
-    id: 'tc52'
+    id: 'tc31 - delete concrete device (standalone)'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -304,19 +292,15 @@ CDev:
       - 'vnsLDevVip/vnsCDev'
 
 - test_case:
-    id: 'tc53'
+    id: 'tc32 - add concrete device (standalone)'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsLDevVip/vnsCDev'
 
-#tc54 - tc55 skipped:
-# 	- Add another CDev to existing Clulster
-# 	- Delete second CDev from existing Cluster
-
 - test_case:
-    id: 'tc56'
+    id: 'tc33 - delete concrete interface'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -324,7 +308,7 @@ CDev:
       - 'vnsCIf'
 
 - test_case:
-    id: 'tc57'
+    id: 'tc34 - add concrete interface'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -332,7 +316,7 @@ CDev:
       - 'vnsCIf'
 
 - test_case:
-    id: 'tc58'
+    id: 'tc35 - delete concrete interface path relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -340,7 +324,7 @@ CDev:
       - 'vnsRsCIfPathAtt'
 
 - test_case:
-    id: 'tc59'
+    id: 'tc36 - add concrete interface path relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -348,7 +332,7 @@ CDev:
       - 'vnsRsCIfPathAtt'
 
 - test_case:
-    id: 'tc60'
+    id: 'tc37 - delete concrete device mgmt'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -356,7 +340,7 @@ CDev:
       - 'vnsCDev/vnsCMgmt'
 
 - test_case:
-    id: 'tc61'
+    id: 'tc38 - add concrete device mgmt'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -364,25 +348,7 @@ CDev:
       - 'vnsCDev/vnsCMgmt'
 
 - test_case:
-    id: 'tc62'
-    operation: 'delete'
-    common_tenant: False
-    sleep: 60
-    element:
-      - 'vnsCDev/vnsCCred'
-      - 'vnsCDev/vnsCCredSecret'
-
-- test_case:
-    id: 'tc63'
-    operation: 'add'
-    common_tenant: False
-    sleep: 600
-    element:
-      - 'vnsCDev/vnsCCred'
-      - 'vnsCDev/vnsCCredSecret'
-
-- test_case:
-    id: 'tc64'
+    id: 'tc39 - delete attribute devCtxLbl'
     operation: 'deleteAttribute'
     attribute: 'devCtxLbl'
     attrValue: ''
@@ -391,7 +357,7 @@ CDev:
       - 'vnsLDevVip/vnsCDev'
 
 - test_case:
-    id: 'tc65'
+    id: 'tc40 - add attriute devCtxLbl'
     operation: 'addAttribute'
     attribute: 'devCtxLbl'
     attrValue: ''
@@ -400,7 +366,7 @@ CDev:
       - 'vnsLDevVip/vnsCDev'
 
 - test_case:
-    id: 'tc66'
+    id: 'tc41 - delete concrete device param vnsDevFolder'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -408,14 +374,12 @@ CDev:
       - 'vnsCDev/vnsDevFolder'
 
 - test_case:
-    id: 'tc67'
+    id: 'tc42 - add concrete device param vnsDevFolder'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsCDev/vnsDevFolder'
-
-#tc68 - tc73 skipped - modify
 
 
 #+--------------+
@@ -423,7 +387,7 @@ CDev:
 #+--------------+
 Graph:
 - test_case:
-    id: 'tc74'
+    id: 'tc43 - delete provider terminal node'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -431,7 +395,7 @@ Graph:
       - 'vnsAbsTermNodeProv'
 
 - test_case:
-    id: 'tc75'
+    id: 'tc44 - add provider terminal node'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -439,7 +403,7 @@ Graph:
       - 'vnsAbsTermNodeProv'
 
 - test_case:
-    id: 'tc76'
+    id: 'tc45 - delete consumer terminal node'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -447,7 +411,7 @@ Graph:
       - 'vnsAbsTermNodeCon'
 
 - test_case:
-    id: 'tc77'
+    id: 'tc46 - add consumer terminal node'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -455,7 +419,7 @@ Graph:
       - 'vnsAbsTermNodeCon'
 
 - test_case:
-    id: 'tc78'
+    id: 'tc47 - delete graph function node'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -463,19 +427,15 @@ Graph:
       - 'vnsAbsNode'
 
 - test_case:
-    id: 'tc79'
+    id: 'tc48 - add graph function node'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsAbsNode'
 
-#tc80 and tc81 skipped:
-#	- Add a second node to the Graph
-# 	- Delete the second node to the Graph
-
 - test_case:
-    id: 'tc82'
+    id: 'tc49 - delete default graph terminal scope'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -483,7 +443,7 @@ Graph:
       - 'vnsRsDefaultScopeToTerm'
 
 - test_case:
-    id: 'tc83'
+    id: 'tc50 - add default graph terminal scope'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -491,7 +451,7 @@ Graph:
       - 'vnsRsDefaultScopeToTerm'
 
 - test_case:
-    id: 'tc84'
+    id: 'tc51 - delete node to meta function relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -499,7 +459,7 @@ Graph:
       - 'vnsRsNodeToMFunc'
 
 - test_case:
-    id: 'tc85'
+    id: 'tc52 - add node to meta function relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -507,7 +467,7 @@ Graph:
       - 'vnsRsNodeToMFunc'
 
 - test_case:
-    id: 'tc86'
+    id: 'tc53 - delete function connector filter'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -515,7 +475,7 @@ Graph:
       - 'vnsRsConnToFlt'
 
 - test_case:
-    id: 'tc87'
+    id: 'tc54 - add function connector filter'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -523,7 +483,7 @@ Graph:
       - 'vnsRsConnToFlt'
 
 - test_case:
-    id: 'tc88'
+    id: 'tc55 - delete graph connections'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -531,17 +491,15 @@ Graph:
       - 'vnsAbsConnection'
 
 - test_case:
-    id: 'tc89'
+    id: 'tc56 - add graph connections'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsAbsConnection'
 
-#tc90 skipped - Change the connections in vnsAbsConnection
-
 - test_case:
-    id: 'tc91'
+    id: 'tc57 - delete function configs'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -549,7 +507,7 @@ Graph:
       - 'vnsAbsFuncCfg'
 
 - test_case:
-    id: 'tc92'
+    id: 'tc58 - add function configs'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -557,7 +515,7 @@ Graph:
       - 'vnsAbsFuncCfg'
 
 - test_case:
-    id: 'tc93'
+    id: 'tc59 - delete function profile folders'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -565,7 +523,7 @@ Graph:
       - 'vnsAbsFuncCfg/vnsAbsFolder'
 
 - test_case:
-    id: 'tc94'
+    id: 'tc60 - add function profile folders'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -573,7 +531,7 @@ Graph:
       - 'vnsAbsFuncCfg/vnsAbsFolder'
 
 - test_case:
-    id: 'tc95'
+    id: 'tc61 - delete funciton profile parameters'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -581,7 +539,7 @@ Graph:
       - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsParam'
 
 - test_case:
-    id: 'tc96'
+    id: 'tc62 - add function profile parameters'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -589,7 +547,7 @@ Graph:
       - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsParam'
 
 - test_case:
-    id: 'tc97'
+    id: 'tc63 - delete function profile relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -597,17 +555,15 @@ Graph:
       - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsCfgRel'
 
 - test_case:
-    id: 'tc98'
+    id: 'tc64 - add function profile relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsAbsFuncCfg/vnsAbsFolder/vnsAbsCfgRel'
 
-#tc99 - tc104 do not exist in spreadsheet
-
 - test_case:
-    id: 'tc105'
+    id: 'tc65 - delete function profile devFolder relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -615,17 +571,15 @@ Graph:
       - 'vnsAbsFuncCfg/vnsDevFolder/vnsAbsCfgRel'
 
 - test_case:
-    id: 'tc106'
+    id: 'tc66 - add function profile devFolder relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsAbsFuncCfg/vnsDevFolder/vnsAbsCfgRel'
 
-#tc107 - tc112 skipped - AbsGrpCfg
-
 - test_case:
-    id: 'tc113'
+    id: 'tc67 - delete devCfg relations'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -633,19 +587,20 @@ Graph:
       - 'vnsAbsDevCfg/vnsDevFolder/vnsAbsCfgRel'
 
 - test_case:
-    id: 'tc114'
+    id: 'tc68 - add devCfg relations'
     operation: 'add'
     common_tenant: False
     sleep: 600
     element:
       - 'vnsAbsDevCfg/vnsDevFolder/vnsAbsCfgRel'
+
 
 #+--------------+
 #| Test Section |
 #+--------------+
 Contract:
 - test_case:
-    id: 'tc115'
+    id: 'tc69 - delete contract subject'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -653,7 +608,7 @@ Contract:
       - 'vzBrCP/vzSubj'
 
 - test_case:
-    id: 'tc116'
+    id: 'tc70 - add contract subject'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -661,7 +616,7 @@ Contract:
       - 'vzBrCP/vzSubj'
 
 - test_case:
-    id: 'tc117'
+    id: 'tc71 - delete contract graph association'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -669,7 +624,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzRsSubjGraphAtt'
 
 - test_case:
-    id: 'tc118'
+    id: 'tc72 - add contract graph association'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -677,7 +632,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzRsSubjGraphAtt'
 
 - test_case:
-    id: 'tc119'
+    id: 'tc73 - delete contract subject filter'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -685,7 +640,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzRsSubjFiltAtt'
 
 - test_case:
-    id: 'tc120'
+    id: 'tc74 - add contract subject filter'
     operation: 'add'
     common_tenant: False
     sleep: 300
@@ -693,7 +648,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzRsSubjFiltAtt'
 
 - test_case:
-    id: 'tc121'
+    id: 'tc75 - delete contract inbound subject'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -701,7 +656,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzInTerm'
 
 - test_case:
-    id: 'tc122'
+    id: 'tc76 - add contract inbound subject'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -709,7 +664,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzInTerm'
 
 - test_case:
-    id: 'tc123'
+    id: 'tc77 - delete contract inbound graph association'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -717,7 +672,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzInTerm/vzRsInTermGraphAtt'
 
 - test_case:
-    id: 'tc124'
+    id: 'tc78 - add contract inbound graph association'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -725,7 +680,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzInTerm/vzRsInTermGraphAtt'
 
 - test_case:
-    id: 'tc125'
+    id: 'tc79 - delete contract inbound subject filter'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -733,7 +688,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzInTerm/vzRsFiltAtt'
 
 - test_case:
-    id: 'tc126'
+    id: 'tc80 - add contract inbound subject filter'
     operation: 'add'
     common_tenant: False
     sleep: 300
@@ -741,7 +696,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzInTerm/vzRsFiltAtt'
 
 - test_case:
-    id: 'tc127'
+    id: 'tc81 - delete contract outbound subject'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -749,7 +704,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzOutTerm'
 
 - test_case:
-    id: 'tc128'
+    id: 'tc82 - add contract outbound subject'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -757,7 +712,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzOutTerm'
 
 - test_case:
-    id: 'tc129'
+    id: 'tc83 - delete contract outbound subject graph association'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -765,7 +720,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzOutTerm/vzRsOutTermGraphAtt'
 
 - test_case:
-    id: 'tc130'
+    id: 'tc84 - add contract outbound subject graph association'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -773,7 +728,7 @@ Contract:
       - 'vzBrCP/vzSubj/vzOutTerm/vzRsOutTermGraphAtt'
 
 - test_case:
-    id: 'tc131'
+    id: 'tc85 - delete contract outbound subject filter'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -781,21 +736,21 @@ Contract:
       - 'vzBrCP/vzSubj/vzOutTerm/vzRsFiltAtt'
 
 - test_case:
-    id: 'tc132'
+    id: 'tc86 - add contract outbound subjet filter'
     operation: 'add'
     common_tenant: False
     sleep: 300
     element:
       - 'vzBrCP/vzSubj/vzOutTerm/vzRsFiltAtt'
 
-# tc133 - tc142 are modify tests
+
 
 #+--------------+
 #| Test Section |
 #+--------------+
 Application:
 - test_case:
-    id: 'tc143'
+    id: 'tc87 - delete folder instance uder EPG'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -803,7 +758,7 @@ Application:
       - 'fvAEPg/vnsFolderInst'
 
 - test_case:
-    id: 'tc144'
+    id: 'tc88 - add folder instance under EPG '
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -811,7 +766,7 @@ Application:
       - 'fvAEPg/vnsFolderInst'
 
 - test_case:
-    id: 'tc145'
+    id: 'tc89 - delete parameter under EPG'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -819,7 +774,7 @@ Application:
       - 'fvAEPg/vnsFolderInst/vnsParamInst'
 
 - test_case:
-    id: 'tc146'
+    id: 'tc90 - add parameter under EPG'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -827,7 +782,7 @@ Application:
       - 'fvAEPg/vnsFolderInst/vnsParamInst'
 
 - test_case:
-    id: 'tc147'
+    id: 'tc91 - delete relations under EPG'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -835,7 +790,7 @@ Application:
       - 'fvAEPg/vnsFolderInst/vnsCfgRelInst'
 
 - test_case:
-    id: 'tc148'
+    id: 'tc92 - add relations under EPG'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -843,7 +798,7 @@ Application:
       - 'fvAEPg/vnsFolderInst/vnsCfgRelInst'
 
 - test_case:
-    id: 'tc152'
+    id: 'tc93 - delete folder instance under application profile'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -851,7 +806,7 @@ Application:
       - 'fvAp/vnsFolderInst'
 
 - test_case:
-    id: 'tc153'
+    id: 'tc94 - add folder instance under application profile'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -859,7 +814,7 @@ Application:
       - 'fvAp/vnsFolderInst'
 
 - test_case:
-    id: 'tc154'
+    id: 'tc95 - delete parameters under application profile'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -867,7 +822,7 @@ Application:
       - 'fvAp/vnsFolderInst/vnsParamInst'
 
 - test_case:
-    id: 'tc155'
+    id: 'tc96 - add parameters under application profile'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -875,7 +830,7 @@ Application:
       - 'fvAp/vnsFolderInst/vnsParamInst'
 
 - test_case:
-    id: 'tc156'
+    id: 'tc97 - delete relations under application profile'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -883,7 +838,7 @@ Application:
       - 'fvAp/vnsFolderInst/vnsCfgRelInst'
 
 - test_case:
-    id: 'tc157'
+    id: 'tc98 - add relations under application profile'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -891,7 +846,7 @@ Application:
       - 'fvAp/vnsFolderInst/vnsCfgRelInst'
 
 - test_case:
-    id: 'tc161'
+    id: 'tc99 - delete folder instance under tenant'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -899,7 +854,7 @@ Application:
       - 'fvTenant/vnsFolderInst'
 
 - test_case:
-    id: 'tc162'
+    id: 'tc100 - add folder instance under tenant'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -907,7 +862,7 @@ Application:
       - 'fvTenant/vnsFolderInst'
 
 - test_case:
-    id: 'tc163'
+    id: 'tc101 - delete parameters under tenant'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -915,7 +870,7 @@ Application:
       - 'fvTenant/vnsFolderInst/vnsParamInst'
 
 - test_case:
-    id: 'tc164'
+    id: 'tc102 - add parameters under tenant'
     operation: 'add'
     common_tenant: False
     sleep: 600
@@ -923,7 +878,7 @@ Application:
       - 'fvTenant/vnsFolderInst/vnsParamInst'
 
 - test_case:
-    id: 'tc165'
+    id: 'tc103 - delete relations under tenant'
     operation: 'delete'
     common_tenant: False
     sleep: 60
@@ -931,7 +886,7 @@ Application:
       - 'fvTenant/vnsFolderInst/vnsCfgRelInst'
 
 - test_case:
-    id: 'tc166'
+    id: 'tc104 - add relations under tenant'
     operation: 'add'
     common_tenant: False
     sleep: 600
