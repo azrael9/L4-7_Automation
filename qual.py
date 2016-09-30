@@ -67,17 +67,19 @@ def run(trigger):
     
     # graph validation
     test_graphs = findAppliedGraphs()
-    if not test_graphs == graphs and operation == 'add':
-        pytest.fail('Configs have not converged. Service graphs before test: {0}   Service graphs after test: {1}'.format(graphs, test_graphs))
+    if not test_graphs == graphs:
+        if 'add' in operation:
+            pytest.fail('Configs have not converged. Service graphs before test: {0}   Service graphs after test: {1}'.format(graphs, test_graphs))
 
     # Traffic validation
-    if args.ixia_feature == True and operation == 'add':
+    if args.ixia_feature == True:
         ixia = ixiaStats(testdef['Ixia'])
         with ixia.connect():
             framesTxRate = ixia.framesSentRate(testdef['TxCard'], testdef['TxPort'])
             framesRxRate = ixia.framesReceivedRate(testdef['RxCard'], testdef['RxPort'])
         if not ixia.isclose(framesTxRate, framesRxRate) or ixia.isclose(framesTxRate, 0):
-            pytest.fail('Ixia traffic validation failed! Tx rate: {0}  Rx rate: {1}'.format(framesTxRate, framesRxRate))
+            if 'add' in operation:
+                pytest.fail('Ixia traffic validation failed! Tx rate: {0}  Rx rate: {1}'.format(framesTxRate, framesRxRate))
 
 def findAppliedGraphs():
     ''' Return number of graphs in applied state 
@@ -85,9 +87,9 @@ def findAppliedGraphs():
     '''
     apic = get_APIC(apicInfo)
     get = {
-    'path' : 'api/node/mo/uni/tn-{0}.json'.format(tenant),
-    'query' : 'query-target=children&target-subtree-class=vnsGraphInst&query-target-filter=eq(vnsGraphInst.configSt,"applied"'
-    }
+        'path' : 'api/node/mo/uni/tn-{0}.json'.format(tenant),
+        'query' : 'query-target=children&target-subtree-class=vnsGraphInst&query-target-filter=eq(vnsGraphInst.configSt,"applied"'
+        }
     success, status, payload = apic.get(**get)
     if not success:
         return -1
