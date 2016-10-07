@@ -1,17 +1,17 @@
 #+-------------------+
 #| User testbed info |
 #+-------------------+
-APIC: 172.25.246.26
+APIC: 192.168.1.1
 Username: admin
-Password: ins3965!
+Password: secretpasswd 
 
-Ixia: 172.25.246.104
-TxCard: 3
+Ixia: 192.168.1.2
+TxCard: 1
 TxPort: 1
-RxCard: 3
+RxCard: 1
 RxPort: 2
 
-Tenant: cp_test_delete
+Tenant: myTenant
 Common_tenant: common 
 
 #+--------------+
