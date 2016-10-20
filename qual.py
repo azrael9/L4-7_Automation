@@ -155,7 +155,7 @@ def test_Custom(trigger):
 
 
 def main():
-    pytest.main(['-sv','-rfse','--collect-only'])
+    pytest.main(['-sv','-rfse'])
 
 if __name__ == '__main__':
     main()
