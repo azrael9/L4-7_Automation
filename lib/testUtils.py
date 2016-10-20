@@ -37,9 +37,9 @@ def _testdata(testdef, section, trimmer):
         tenant = testdef['Common_tenant'] if testcase['common_tenant'] is True else testdef['Tenant']
         testconfig = trimmer.trim(tenant, *testcase['element'])
         sleepTime = testcase['sleep']
+        operation = testcase['operation']
         # modify attributes
         if testconfig is not None:
-            operation = testcase['operation']
             test_operations[operation](testcase, testconfig)
 
         testcase = {testcase['id']:[tenant, testconfig, operation, sleepTime]}
