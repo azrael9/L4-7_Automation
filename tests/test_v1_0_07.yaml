@@ -17,6 +17,9 @@ RxPort: 2
 Tenant: test_tenant
 Common_tenant: common 
 
+LDevVipPassword: 'clusterpassword'
+CDevPassword: 'devicepassword'
+
 #+--------------+
 #| Test Section |
 #+--------------+
@@ -144,6 +147,7 @@ LDevVip:
     id: 'tc14 - add L4-7 device'
     operation: 'add'
     common_tenant: False
+    update_password: True
     sleep: 600
     element:
      - 'vnsLDevVip'
@@ -242,6 +246,7 @@ LDevVip:
     id: 'tc26 - add concrete device (cluster)'
     operation: 'add'
     common_tenant: False
+    update_password: True
     sleep: 600
     element:
       - 'vnsLDevVip/vnsCDev'
@@ -295,6 +300,7 @@ CDev:
     id: 'tc32 - add concrete device (standalone)'
     operation: 'add'
     common_tenant: False
+    update_password: True
     sleep: 600
     element:
       - 'vnsLDevVip/vnsCDev'
@@ -353,6 +359,7 @@ CDev:
     attribute: 'devCtxLbl'
     attrValue: ''
     common_tenant: False
+    sleep: 60
     element:
       - 'vnsLDevVip/vnsCDev'
 
@@ -362,6 +369,8 @@ CDev:
     attribute: 'devCtxLbl'
     attrValue: ''
     common_tenant: False
+    update_password: True
+    sleep: 600
     element:
       - 'vnsLDevVip/vnsCDev'
 

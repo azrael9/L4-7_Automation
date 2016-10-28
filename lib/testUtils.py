@@ -29,7 +29,8 @@ def _testdata(testdef, section, trimmer):
     test_operations = { 'add'               : _add,
                         'delete'            : _delete,
                         'addAttribute'      : _addAttr,
-                        'deleteAttribute'   : _deleteAttr}
+                        'deleteAttribute'   : _deleteAttr,
+                        'updatePassword'    : _updatePassword}
 
     testdata = []
     for test in testdef[section]:
@@ -41,6 +42,8 @@ def _testdata(testdef, section, trimmer):
         # modify attributes
         if testconfig is not None:
             test_operations[operation](testcase, testconfig)
+        if testcase.has_key('update_password') and testcase['update_password']:
+            test_operations['updatePassword'](testcase, testconfig, testdef)
 
         testcase = {testcase['id']:[tenant, testconfig, operation, sleepTime]}
         testdata.append(testcase)
@@ -131,3 +134,17 @@ def _deleteAttr(testcase, testconfig):
     nodeList = list(itertools.chain(*nodes))
     for node in nodeList:
         node.attrib[attribute] = ''
+
+def _updatePassword(testcase, testconfig, passwords):
+    '''Add password value to config
+    :return: None
+    '''
+    nodes = [testconfig.xpath('//vnsLDevVip/vnsCCredSecret')]
+    nodeList = list(itertools.chain(*nodes))
+    for node in nodeList:
+        node.attrib['value'] = passwords['LDevVipPassword']
+
+    nodes = [testconfig.xpath('//vnsCDev/vnsCCredSecret')]
+    nodeList = list(itertools.chain(*nodes))
+    for node in nodeList:
+        node.attrib['value'] = passwords['CDevPassword']
