@@ -273,7 +273,7 @@ LDevVip:
     common_tenant: False
     sleep: 60
     element:
-      - 'vnsRsCIfAtt'
+      - 'vnsRsCIfAttN'
 
 - test_case:
     id: 'tc30 - add concrete interface relations'
@@ -281,7 +281,7 @@ LDevVip:
     common_tenant: False
     sleep: 600
     element:
-      - 'vnsRsCIfAtt'
+      - 'vnsRsCIfAttN'
 
 
 #+--------------+
